@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 
-class FavouriteScreenController extends GetxController {
-  //TODO: Implement FavouriteScreenController
+class FavouritScreenController extends GetxController {
+  //TODO: Implement FavouritScreenController
 
   final count = 0.obs;
   @override

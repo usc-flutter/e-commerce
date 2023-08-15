@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 
-class ProdctDetailsScreenController extends GetxController {
-  //TODO: Implement ProdctDetailsScreenController
+class ResultScreenController extends GetxController {
+  //TODO: Implement ResultScreenController
 
   final count = 0.obs;
   @override

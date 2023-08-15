@@ -2,20 +2,20 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
-import '../controllers/favourite_screen_controller.dart';
+import '../controllers/favourit_screen_controller.dart';
 
-class FavouriteScreenView extends GetView<FavouriteScreenController> {
-  const FavouriteScreenView({Key? key}) : super(key: key);
+class FavouritScreenView extends GetView<FavouritScreenController> {
+  const FavouritScreenView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('FavouriteScreenView'),
+        title: const Text('FavouritScreenView'),
         centerTitle: true,
       ),
       body: const Center(
         child: Text(
-          'FavouriteScreenView is working',
+          'FavouritScreenView is working',
           style: TextStyle(fontSize: 20),
         ),
       ),
