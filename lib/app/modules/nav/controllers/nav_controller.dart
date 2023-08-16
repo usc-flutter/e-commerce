@@ -7,9 +7,12 @@ class NavController extends GetxController
 
   @override
   void onInit() {
-    tabController = TabController(length: 4, vsync: this);
+    tabController = TabController(
+        length: 4, vsync: this, animationDuration: const Duration(seconds: 2));
     super.onInit();
   }
 
-  change() {}
+  change(int index) {
+    tabController.index = index;
+  }
 }

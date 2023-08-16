@@ -13,6 +13,7 @@ abstract class Routes {
   static const RESULT_SCREEN = _Paths.RESULT_SCREEN;
   static const LOGIN_SCREEN = _Paths.LOGIN_SCREEN;
   static const LOG_OUT_SCREEN = _Paths.LOG_OUT_SCREEN;
+  static const SIGN_UP_SCREEN = _Paths.SIGN_UP_SCREEN;
 }
 
 abstract class _Paths {
@@ -27,4 +28,5 @@ abstract class _Paths {
   static const RESULT_SCREEN = '/result-screen';
   static const LOGIN_SCREEN = '/login-screen';
   static const LOG_OUT_SCREEN = '/log-out-screen';
+  static const SIGN_UP_SCREEN = '/sign-up-screen';
 }

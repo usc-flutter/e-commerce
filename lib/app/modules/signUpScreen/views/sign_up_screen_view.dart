@@ -1,16 +1,14 @@
-import 'package:e_commerce/app/modules/nav/views/nav_view.dart';
-import 'package:e_commerce/app/modules/signUpScreen/views/sign_up_screen_view.dart';
-import 'package:e_commerce/const/k_image_path.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
 
+import '../../../../const/k_image_path.dart';
 import '../../../../widgets/k_input_text_field.dart';
-import '../controllers/login_screen_controller.dart';
+import '../controllers/sign_up_screen_controller.dart';
 
-class LoginScreenView extends GetView<LoginScreenController> {
-  const LoginScreenView({Key? key}) : super(key: key);
+class SignUpScreenView extends GetView<SignUpScreenController> {
+  const SignUpScreenView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -19,7 +17,7 @@ class LoginScreenView extends GetView<LoginScreenController> {
       },
       child: Scaffold(
         body: Hero(
-          tag: "Login",
+          tag: "signUp",
           transitionOnUserGestures: true,
           child: Center(
             child: SingleChildScrollView(
@@ -32,7 +30,7 @@ class LoginScreenView extends GetView<LoginScreenController> {
                     ),
                     10.verticalSpace,
                     Text(
-                      "Welcome Back",
+                      "Register!",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 30,
@@ -41,7 +39,7 @@ class LoginScreenView extends GetView<LoginScreenController> {
                     ),
                     10.verticalSpace,
                     Text(
-                      "Login to your existing account",
+                      "Create your new account",
                       style: TextStyle(
                         fontSize: 16,
                         color: Colors.grey,
@@ -51,7 +49,14 @@ class LoginScreenView extends GetView<LoginScreenController> {
                     KInputTextField(
                       icon: Icons.person,
                       isPassword: false,
-                      hintText: "User Name or Email",
+                      hintText: "Full Name",
+                    ),
+                    20.verticalSpace,
+                    KInputTextField(
+                      icon: Icons.mail,
+                      isPassword: false,
+                      isMail: true,
+                      hintText: "Email",
                     ),
                     20.verticalSpace,
                     KInputTextField(
@@ -59,37 +64,25 @@ class LoginScreenView extends GetView<LoginScreenController> {
                       isPassword: true,
                       hintText: "Password",
                     ),
-                    10.verticalSpace,
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        TextButton(
-                            onPressed: () {},
-                            child: const Text("Forgot Password")),
-                        20.horizontalSpace
-                      ],
-                    ),
                     20.verticalSpace,
                     ElevatedButton(
-                      onPressed: () {
-                        Get.offAll(() => const NavView());
-                      },
+                      onPressed: () {},
                       style: ElevatedButton.styleFrom(
                           padding: EdgeInsets.symmetric(
                               horizontal: 50.h, vertical: 15.h),
                           backgroundColor: Colors.green),
-                      child: const Text("SignIn"),
+                      child: const Text("SignUp"),
                     ),
                     20.verticalSpace,
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Text("Don't have a account"),
+                        const Text("Already have a account"),
                         TextButton(
                             onPressed: () {
-                              Get.to(() => const SignUpScreenView());
+                              Get.back();
                             },
-                            child: const Text("SignUp"))
+                            child: const Text("SignIn"))
                       ],
                     )
                   ]),

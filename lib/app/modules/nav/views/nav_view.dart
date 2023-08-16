@@ -1,3 +1,7 @@
+import 'package:e_commerce/app/modules/cartScreen/views/cart_screen_view.dart';
+import 'package:e_commerce/app/modules/favouritScreen/views/favourit_screen_view.dart';
+import 'package:e_commerce/app/modules/homeScreen/views/home_screen_view.dart';
+import 'package:e_commerce/app/modules/profileScreen/views/profile_screen_view.dart';
 import 'package:e_commerce/const/k_colors.dart';
 import 'package:flutter/material.dart';
 
@@ -16,10 +20,10 @@ class NavView extends GetView<NavController> {
         child: Scaffold(
           backgroundColor: KColors.scaffold,
           body: TabBarView(controller: controller.tabController, children: [
-            Text("data"),
-            Text("data"),
-            Text("data"),
-            Text("data"),
+            HomeScreenView(),
+            CartScreenView(),
+            FavouritScreenView(),
+            ProfileScreenView(),
           ]),
           bottomNavigationBar: Container(
             decoration: BoxDecoration(
@@ -30,31 +34,36 @@ class NavView extends GetView<NavController> {
               ),
             ),
             child: TabBar(
+                onTap: (value) {
+                  controller.change(value);
+                },
                 padding: EdgeInsets.all(10),
                 indicatorColor: Colors.transparent,
+                unselectedLabelColor: KColors.black,
+                labelColor: KColors.blue,
                 tabs: [
                   Tab(
+                    text: "Home",
                     icon: Icon(
                       Icons.home,
-                      color: KColors.black,
                     ),
                   ),
                   Tab(
+                    text: "Cart",
                     icon: Icon(
-                      Icons.home,
-                      color: KColors.black,
+                      Icons.shopping_cart_sharp,
                     ),
                   ),
                   Tab(
+                    text: "Fovorite",
                     icon: Icon(
-                      Icons.home,
-                      color: KColors.black,
+                      Icons.favorite,
                     ),
                   ),
                   Tab(
+                    text: "Profile",
                     icon: Icon(
-                      Icons.home,
-                      color: KColors.black,
+                      Icons.person,
                     ),
                   ),
                 ]),

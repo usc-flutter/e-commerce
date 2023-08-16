@@ -18,6 +18,8 @@ import '../modules/profileScreen/bindings/profile_screen_binding.dart';
 import '../modules/profileScreen/views/profile_screen_view.dart';
 import '../modules/resultScreen/bindings/result_screen_binding.dart';
 import '../modules/resultScreen/views/result_screen_view.dart';
+import '../modules/signUpScreen/bindings/sign_up_screen_binding.dart';
+import '../modules/signUpScreen/views/sign_up_screen_view.dart';
 import '../modules/splashScreen/bindings/splash_screen_binding.dart';
 import '../modules/splashScreen/views/splash_screen_view.dart';
 
@@ -78,6 +80,11 @@ class AppPages {
       name: _Paths.LOG_OUT_SCREEN,
       page: () => const LogOutScreenView(),
       binding: LogOutScreenBinding(),
+    ),
+    GetPage(
+      name: _Paths.SIGN_UP_SCREEN,
+      page: () => const SignUpScreenView(),
+      binding: SignUpScreenBinding(),
     ),
   ];
 }
