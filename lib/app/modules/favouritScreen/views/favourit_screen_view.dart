@@ -1,3 +1,4 @@
+import 'package:e_commerce/const/k_colors.dart';
 import 'package:e_commerce/const/k_image_path.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -19,10 +20,10 @@ class FavouritScreenView extends GetView<FavouritScreenController> {
             child: ListView(
               children: [
                 SizedBox(
-                  height: 180.h * 2,
+                  height: 180.h * 5,
                   child: ListView.builder(
                     physics: const NeverScrollableScrollPhysics(),
-                    itemCount: 2,
+                    itemCount: 5,
                     itemBuilder: (context, index) {
                       return Padding(
                         padding: EdgeInsets.symmetric(vertical: 10.h),
@@ -90,8 +91,47 @@ class FavouritScreenView extends GetView<FavouritScreenController> {
                       );
                     },
                   ),
-                )
+                ),
               ],
+            ),
+          ),
+          8.verticalSpace,
+          SizedBox(
+            width: double.infinity,
+            height: 50.h,
+            child: ElevatedButton(
+              onPressed: () {},
+              child: Text(
+                "Continue Shoping",
+                style: TextStyle(fontSize: 20.sp, color: KColors.black),
+              ),
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(KColors.white),
+                shape: MaterialStateProperty.all(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(50),
+                  ),
+                ),
+              ),
+            ),
+          ),
+          8.verticalSpace,
+          SizedBox(
+            width: double.infinity,
+            height: 50.h,
+            child: ElevatedButton(
+              onPressed: () {},
+              child: Text(
+                "Add to Cart",
+                style: TextStyle(fontSize: 20.sp),
+              ),
+              style: ButtonStyle(
+                shape: MaterialStateProperty.all(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(50),
+                  ),
+                ),
+              ),
             ),
           ),
         ],
