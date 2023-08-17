@@ -40,11 +40,11 @@ class HomeScreenView extends GetView<HomeScreenController> {
 
             Container(
               alignment: Alignment.center,
-              padding: EdgeInsets.only(left: 10.w),
+              padding: EdgeInsets.only(left: 15.w, top: 2.w),
               height: 40.h,
               decoration: BoxDecoration(
                   color: Colors.white, borderRadius: BorderRadius.circular(30)),
-              child: const TextField(
+              child: TextField(
                 readOnly: true,
                 decoration: InputDecoration(
                     suffixIcon: Icon(Icons.search),
@@ -133,13 +133,19 @@ class HomeScreenView extends GetView<HomeScreenController> {
                           width: 50.h,
                           height: 50.h,
                           decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5.h),
                               image: DecorationImage(
                                   fit: BoxFit.cover,
                                   image: NetworkImage(
                                       "https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8NXx8fGVufDB8fHx8fA%3D%3D&w=1000&q=80"))),
                         ),
                         5.verticalSpace,
-                        Text("Fruites"),
+                        SizedBox(
+                            width: 50.h,
+                            child: Text(
+                              "Fruites ",
+                              overflow: TextOverflow.ellipsis,
+                            )),
                       ],
                     ),
                   );
