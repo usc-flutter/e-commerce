@@ -189,10 +189,7 @@ class HomeScreenView extends GetView<HomeScreenController> {
                         itemBuilder: (context, index) {
                           DemoUiData data = controller.productList[index];
                           return HomePageProductCart(
-                            imgUrl: data.imgUrl,
-                            name: data.productName,
-                            price: data.price,
-                            productId: data.productId,
+                            data: data,
                           );
                         },
                       ),
@@ -210,15 +207,10 @@ class HomeScreenView extends GetView<HomeScreenController> {
 class HomePageProductCart extends GetView<HomeScreenController> {
   HomePageProductCart({
     super.key,
-    required this.imgUrl,
-    required this.name,
-    required this.price,
-    required this.productId,
+    required this.data,
   });
-  late String name;
-  late String productId;
-  late String imgUrl;
-  late double price;
+
+  late DemoUiData data;
 
   @override
   Widget build(BuildContext context) {
@@ -242,7 +234,7 @@ class HomePageProductCart extends GetView<HomeScreenController> {
                       topRight: Radius.circular(10.h)),
                   image: DecorationImage(
                     fit: BoxFit.fitWidth,
-                    image: NetworkImage(imgUrl),
+                    image: NetworkImage(data.imgUrl),
                   ),
                 ),
               ),
@@ -251,10 +243,10 @@ class HomePageProductCart extends GetView<HomeScreenController> {
                 child: Obx(
                   () => IconButton(
                     onPressed: () {
-                      controller.addOrRemoveFavorit(productId);
+                      controller.addOrRemoveFavorit(data.productId);
                       print(controller.favorite);
                     },
-                    icon: controller.favorite.contains(productId)
+                    icon: controller.favorite.contains(data.productId)
                         ? Icon(
                             Icons.favorite,
                             color: Colors.red,
@@ -278,18 +270,20 @@ class HomePageProductCart extends GetView<HomeScreenController> {
                   SizedBox(
                       width: 70.w,
                       child: Text(
-                        "$name ",
+                        "${data.productName} ",
                         overflow: TextOverflow.ellipsis,
                       )),
                   Text.rich(
                     TextSpan(
-                        text: "\$$price",
+                        text: "\$${data.price}",
                         children: const [TextSpan(text: " kg")]),
                   ),
                 ],
               ),
               IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    controller.addCart(data);
+                  },
                   icon: Icon(
                     Icons.add_circle_outline_rounded,
                     color: Colors.red,
