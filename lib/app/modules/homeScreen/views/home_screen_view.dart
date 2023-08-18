@@ -1,14 +1,18 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
 
+import '../../../../demo_ui_data/demo_ui_data.dart';
 import '../controllers/home_screen_controller.dart';
 
 class HomeScreenView extends GetView<HomeScreenController> {
   const HomeScreenView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    Get.put(HomeScreenController());
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.all(12.0),
@@ -166,87 +170,133 @@ class HomeScreenView extends GetView<HomeScreenController> {
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
             ),
             10.verticalSpace, //// space
-            SizedBox(
-              height: 230 * 10,
-              child: GridView.builder(
-                physics: NeverScrollableScrollPhysics(),
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 20,
-                    childAspectRatio: 0.8,
-                    mainAxisSpacing: 20),
-                itemCount: 20,
-                itemBuilder: (context, index) {
-                  return Container(
-                    height: 300.h,
-                    width: 120.h,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(10),
+            Obx(
+              () => controller.isLoading.value
+                  ? const Center(
+                      child: CircularProgressIndicator(),
+                    )
+                  : SizedBox(
+                      height: 230 * 10,
+                      child: GridView.builder(
+                        physics: const NeverScrollableScrollPhysics(),
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2,
+                                crossAxisSpacing: 20,
+                                childAspectRatio: 0.8,
+                                mainAxisSpacing: 20),
+                        itemCount: controller.productList.length,
+                        itemBuilder: (context, index) {
+                          DemoUiData data = controller.productList[index];
+                          return HomePageProductCart(
+                            imgUrl: data.imgUrl,
+                            name: data.productName,
+                            price: data.price,
+                            productId: data.productId,
+                          );
+                        },
+                      ),
                     ),
-                    child: Column(
-                      children: [
-                        Stack(
-                          children: [
-                            Container(
-                              height: 120.h,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(10),
-                                      topRight: Radius.circular(10)),
-                                  image: DecorationImage(
-                                      fit: BoxFit.fitWidth,
-                                      image: NetworkImage(
-                                          "https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8NXx8fGVufDB8fHx8fA%3D%3D&w=1000&q=80"))),
-                            ),
-                            Positioned(
-                                right: 0,
-                                child: IconButton(
-                                    onPressed: () {},
-                                    icon: Icon(
-                                      Icons.favorite,
-                                      color: Colors.red,
-                                    )))
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            2.horizontalSpace,
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                SizedBox(
-                                    width: 70.w,
-                                    child: Text(
-                                      "Apples ",
-                                      overflow: TextOverflow.ellipsis,
-                                    )),
-                                Text.rich(
-                                  TextSpan(
-                                      text: "\$12",
-                                      children: [TextSpan(text: " kg")]),
-                                ),
-                              ],
-                            ),
-                            IconButton(
-                                onPressed: () {},
-                                icon: Icon(
-                                  Icons.add_circle_outline_rounded,
-                                  color: Colors.red,
-                                ))
-                          ],
-                        )
-                      ],
-                    ),
-                  );
-                },
-              ),
             )
             ////product
             ///end
           ],
         ),
+      ),
+    );
+  }
+}
+
+class HomePageProductCart extends GetView<HomeScreenController> {
+  HomePageProductCart({
+    super.key,
+    required this.imgUrl,
+    required this.name,
+    required this.price,
+    required this.productId,
+  });
+  late String name;
+  late String productId;
+  late String imgUrl;
+  late double price;
+
+  @override
+  Widget build(BuildContext context) {
+    Get.put(HomeScreenController());
+    return Container(
+      height: 300.h,
+      width: 120.h,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Column(
+        children: [
+          Stack(
+            children: [
+              Container(
+                height: 120.h,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(10.h),
+                      topRight: Radius.circular(10.h)),
+                  image: DecorationImage(
+                    fit: BoxFit.fitWidth,
+                    image: NetworkImage(imgUrl),
+                  ),
+                ),
+              ),
+              Positioned(
+                right: 0,
+                child: Obx(
+                  () => IconButton(
+                    onPressed: () {
+                      controller.addOrRemoveFavorit(productId);
+                      print(controller.favorite);
+                    },
+                    icon: controller.favorite.contains(productId)
+                        ? Icon(
+                            Icons.favorite,
+                            color: Colors.red,
+                          )
+                        : Icon(
+                            Icons.favorite,
+                            color: Colors.white,
+                          ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              2.horizontalSpace,
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                      width: 70.w,
+                      child: Text(
+                        "$name ",
+                        overflow: TextOverflow.ellipsis,
+                      )),
+                  Text.rich(
+                    TextSpan(
+                        text: "\$$price",
+                        children: const [TextSpan(text: " kg")]),
+                  ),
+                ],
+              ),
+              IconButton(
+                  onPressed: () {},
+                  icon: Icon(
+                    Icons.add_circle_outline_rounded,
+                    color: Colors.red,
+                  ))
+            ],
+          )
+        ],
       ),
     );
   }
