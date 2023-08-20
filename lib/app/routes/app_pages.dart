@@ -2,6 +2,8 @@ import 'package:get/get.dart';
 
 import '../modules/cartScreen/bindings/cart_screen_binding.dart';
 import '../modules/cartScreen/views/cart_screen_view.dart';
+import '../modules/checkOut/bindings/check_out_binding.dart';
+import '../modules/checkOut/views/check_out_view.dart';
 import '../modules/checkoutScreen/bindings/checkout_screen_binding.dart';
 import '../modules/checkoutScreen/views/checkout_screen_view.dart';
 import '../modules/favouritScreen/bindings/favourit_screen_binding.dart';
@@ -85,6 +87,11 @@ class AppPages {
       name: _Paths.SIGN_UP_SCREEN,
       page: () => const SignUpScreenView(),
       binding: SignUpScreenBinding(),
+    ),
+    GetPage(
+      name: _Paths.CHECK_OUT,
+      page: () => const CheckOutView(),
+      binding: CheckOutBinding(),
     ),
   ];
 }

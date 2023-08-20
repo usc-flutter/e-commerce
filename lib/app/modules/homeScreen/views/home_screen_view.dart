@@ -176,7 +176,7 @@ class HomeScreenView extends GetView<HomeScreenController> {
                       child: CircularProgressIndicator(),
                     )
                   : SizedBox(
-                      height: 230 * 10,
+                      height: 150 * controller.productList.length.toDouble(),
                       child: GridView.builder(
                         physics: const NeverScrollableScrollPhysics(),
                         gridDelegate:
