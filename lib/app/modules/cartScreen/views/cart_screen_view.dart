@@ -1,3 +1,4 @@
+import 'package:e_commerce/app/modules/checkOut/views/check_out_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -133,7 +134,9 @@ class CartScreenView extends GetView<CartScreenController> {
             width: double.infinity,
             height: 50.h,
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                Get.to(() => const CheckOutView());
+              },
               child: Text(
                 "Check Out",
                 style: TextStyle(fontSize: 20.sp),

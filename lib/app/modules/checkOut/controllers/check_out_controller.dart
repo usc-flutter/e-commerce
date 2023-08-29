@@ -1,23 +1,19 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class CheckOutController extends GetxController {
-  //TODO: Implement CheckOutController
+class CheckOutController extends GetxController
+    with GetSingleTickerProviderStateMixin {
+  late TabController tabController;
 
-  final count = 0.obs;
   @override
   void onInit() {
     super.onInit();
+    tabController = TabController(length: 3, vsync: this);
   }
 
-  @override
-  void onReady() {
-    super.onReady();
+  checkOnTab() {
+    if (tabController.indexIsChanging) {
+      tabController.index = tabController.previousIndex;
+    }
   }
-
-  @override
-  void onClose() {
-    super.onClose();
-  }
-
-  void increment() => count.value++;
 }
